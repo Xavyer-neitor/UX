@@ -11,14 +11,14 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-		<title>Flujo</title>
-		<link rel="icon" href="favicon.ico" type="image/x-icon">
-		<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+	<title>Email</title>
+	<link rel="icon" href="{{ url_for('static', filename='favicon.ico')}}" type="image/x-icon">
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
 
-		<link rel="stylesheet" type="text/css" href="frontUX.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontUX.css') }}">
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   </head>
 
@@ -45,14 +45,13 @@
 		
 		</div>
 
-
 		<nav class="navbar fixed-top navbar-expand-lg navbar-dark">
 
-				<img src="collapse.png" width="30" height="30" id="colapsar" class="acomodar" alt="logo letshome">
+				<img src="{{ url_for('static', filename='collapse.png')}}" width="30" height="30" id="colapsar" class="acomodar" alt="logo letshome">
 	
-				<a class="navbar-brand" href="frontUX.html">
+				<a class="navbar-brand" href="/">
 	
-					<img src="letshomelogo.png" width="166" height="71" class="d-inline-block align-top" alt="">
+					<img src="{{ url_for('static', filename='letshomelogo.png')}}" width="166" height="71" class="d-inline-block align-top" alt="">
 	
 				</a>
 				
@@ -68,17 +67,19 @@
 					
 						<li class="nav-item">
 							
-							<a class="nav-link" href="sms.html">SMS <span class="sr-only">(current)</span></a>
+							<a class="nav-link" href="/sms">SMS <span class="sr-only">(current)</span></a>
+						
+						</li>
+						
+						<li class="nav-item active">
+						
+							<a class="nav-link" href="/email">Email</a>
 						
 						</li>
 						
 						<li class="nav-item">
-						
-							<a class="nav-link" href="email.html">Email</a>
-						
-						</li>
-
-						<li class="nav-item dropdown active">
+	
+						<li class="nav-item dropdown">
 	
 								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									UX
@@ -93,12 +94,12 @@
 									<a class="dropdown-item" href="heatmap.html">Heatmap</a>
 	
 								</div>
-
+							
 							</li>
 
 							<li class="nav-item">
 							
-								<a class="nav-link" href="bitly.html">Bitly<span class="sr-only">(current)</span> </a>
+								<a class="nav-link" href="http://127.0.0.1:5000/bitly">Bitly<span class="sr-only">(current)</span> </a>
 							
 							</li>
 	
@@ -108,18 +109,77 @@
 		
 			</nav>
 
-			
 		<div class="container-fluid bg">
 
 			<!-- Content here -->
-			<h1>User Experience - Flujo</h1>
+			<h1>User Experience - Email</h1>
 
-			<div class="container-fluid imgwrapperflujo">
-			
-				<img id="ruta" src="flujo3.jpeg" class="rounded center img-responsive">
-			
-			</div>
+
+			<div class="container">
+
+					<table class="table table-striped">
+	
+						<thead>
+	
+							<tr>
+	
+								<th class="bg-secondary" scope="col"><h2>Métrica</h2></th>
+								<th class="bg-secondary" scope="col"><h2>Cantidad</h2></th>
+								<th class="bg-dark" scope="col"><h2>Métrica</h2></th>
+								<th class="bg-dark" scope="col"><h2>Cantidad</h2></th>
+	
+							</tr>
+	
+						</thead>
+	
+						<tbody>
+	
+							<tr class="table-info">
+								<td><h3>Número de Usuarios</h3></td>
+								<td><h3>78000</h3></td>
+								<td class="bg-info"><h3>Página de Inicio</h3></td>
+								<td class="bg-info"><h3>Home</h3></td>
+							</tr>
+	
+							<tr class="thead-dark">
+	
+								<th class="bg-secondary" scope="col"><h2>Métrica</h2></th>
+								<th class="bg-secondary" scope="col"><h2>Cantidad</h2></th>
+								<th scope="col"><h2>Métrica</h2></th>
+								<th scope="col"><h2>Cantidad</h2></th>
+	
+							</tr>
+	
+							<tr class="table-info">
+								<td><h3>Tiempo absoluto de Sesión</h3></th>
+								<td><h3>01:18:32</h3></td>
+								<td class="bg-info	"><h3>Historial de Acciones</h3></td>
+								<td class="bg-info"><h3>Clicks: Mapa -> Filtro-Precio</h3></td>
+							</tr>
+	
+							<tr class="thead-dark">
+	
+									<th class="bg-secondary" scope="col"><h2>Métrica</h2></th>
+									<th class="bg-secondary" scope="col"><h2>Cantidad</h2></th>
+									<th scope="col"><h2>Métrica</h2></th>
+									<th scope="col"><h2>Cantidad</h2></th>
 		
+								</tr>
+		
+								<tr class="table-info">
+									<td><h3>Tiempo entre secciones</h3></th>
+									<td><h3>00:12:32</h3></td>
+									<td class="bg-info"><h3>Ruta</h3></td>
+									<td class="bg-info"><h3>Home -> Mapa</h3></td>
+								</tr>
+	
+						</tbody>
+	
+					</table>
+	
+				</div>
+	
+
 		</div>
 
 		<script type="text/javascript">

@@ -11,12 +11,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-		<title>Panel - User Experience</title>
-		<link rel="icon" href="favicon.ico" type="image/x-icon">
-		<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+	<title>Panel - User Experience</title>
+	<link rel="icon" href="{{ url_for('static', filename='favicon.ico')}}" type="image/x-icon">
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
 
-		<link rel="stylesheet" type="text/css" href="frontUX.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='frontUX.css') }}">
 
   </head>
 
@@ -25,10 +25,10 @@
 		<nav class="navbar fixed-top navbar-dark">
 
 			<!-- Navbar content -->
-			<a class="navbar-brand" href="frontUX.html">
+			<a class="navbar-brand" href="/">
 
-				<img src="letshomelogo.png" width="166" height="71" class="d-inline-block align-top" alt="">
-			
+				<img src="{{ url_for('static', filename='letshomelogo.png')}}" width="166" height="71" class="d-inline-block align-top" alt="">
+
 			</a>
 
 		</nav>
@@ -38,34 +38,44 @@
 			<!-- Content here -->
 			<h1>Panel - User Experience</h1>
 
-			<div class="container">
+			<div class="container-fluid">
 
 				<div class="row imgwrapper justify-content-end">
 
-					<div class="col-4">
+					<div class="col-3">
 
-						<a href="sms.html">
-							<img src="sms.png" class="rounded" class="img-responsive">
+						<a href="/sms">
+							<img src="{{ url_for('static', filename='sms.png')}}" class="rounded" class="img-responsive">
 						</a>
+
 						<h1 class="center">SMS</h1>
 
 					</div>
 
-					<div class="col-4">
+					<div class="col-3">
 
-						<a href="email.html">
-							<img src="gmail2.png" class="rounded" class="img-responsive">
+						<a href="/email">
+							<img src="{{ url_for('static', filename='gmail2.png')}}" class="rounded" class="img-responsive">
 						</a>
 						<h1 class="center">Email</h1>
 
 					</div>
 
-					<div class="col-4">
+					<div class="col-3">
 
 						<a href="heatmap.html">
-							<img src="uiux.png" class="rounded" class="img-responsive">
+								<img src="{{ url_for('static', filename='uiux.png')}}" class="rounded" class="img-responsive">
 						</a>
 						<h1 class="center">UX</h1>
+
+					</div>
+
+					<div class="col-3">
+
+						<a href="http://127.0.0.1:5000/bitly">
+							<img src="{{ url_for('static', filename='bitly1.png')}}" class="rounded" class="img-responsive">
+						</a>
+						<h1 class="center">Bitly</h1>
 
 					</div>
 

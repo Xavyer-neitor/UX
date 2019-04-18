@@ -1,5 +1,5 @@
 import time
-from flask import Flask,render_template,request,jsonify
+from flask import Flask,render_template,request,jsonify,url_for
 from pymongo import *
 from bson.objectid import ObjectId
 from pprint import pprint
@@ -15,8 +15,16 @@ app = Flask(__name__)
  
 @app.route("/")
 def home():
-	return "Tutsplus : Welcome to PyGal Charting Library !! "
- 
+	return render_template('frontUX.html')
+
+@app.route("/email")
+def email():
+	return render_template('email.html')
+
+@app.route("/sms")
+def sms():
+	return render_template('sms.html')
+
 @app.route("/bitly")
 def bitly():
 
@@ -63,18 +71,15 @@ def bitly():
 	custom_style = Style(
 	colors=('#E80080', '#404040', '#9BC850','#E80080', '#404040'))
 
-
 	chart = pygal.Bar(margin=40)
 	chart = pygal.Bar(width=180)
 	chart = pygal.Bar(height=280)
 	chart.title = 'total interacciones por enlace campaña sms-email'
-
 	
 
 	for i in links_populares:
 		chart.add(str([i["camp_id"]])+i['tipo']+' '+'enviados:'+str(i['enviados'])+' '+'entregados:'+str(int((i['entregados']*100)/i['enviados']))+'%'+' '+'interaccion:'+str(int((i['clicks']*100)/i['entregados']))+'%',[{'value':i['clicks'],'label':'clicks'}])
 		
-
 	chart.render_to_file('static/images/bar_chart.svg')
 	img_url = 'static/images/bar_chart.svg?cache=' + str(time.time())
 
@@ -82,5 +87,3 @@ def bitly():
 
 if __name__ == "__main__":
 	app.run()
-
-
