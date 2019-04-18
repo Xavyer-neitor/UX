@@ -19,11 +19,54 @@ def home():
 
 @app.route("/email")
 def email():
-	return render_template('email.html')
+
+	mensaje = "hola que hace :V"
+
+	return render_template( 'email.html', **locals() )
 
 @app.route("/sms")
 def sms():
-	return render_template('sms.html')
+
+	#trabajar desde una base de datos
+	db = MongoClient('mongodb://Scraper%2Fops:R3vim3x5o5%2F%2F@13.52.11.40:27017/admin').XLamudi
+	db2 = MongoClient('mongodb://commserver:pbn2OpfekjfZnp?2v49183D09.f93nv049u@35.227.93.9:27017/admin').commserver
+	collection = db['bitly']
+	enlaces=[x for x in collection.find({})]
+	collection2 = db2['deliveredmsgs']
+	collection3 = db2['deliveredmails']
+	sms = [y for y in collection2.find({})]
+	email = [z for z in collection3.find({})]
+	tokenbitly = 'e51c52061b3675fd00e523dfa557bd5efd21558e' #token para api
+	url='https://api-ssl.bitly.com/v3/user/popular_links?access_token={}'
+	r = json.loads((requests.get(url.format(tokenbitly)).content).decode('utf-8'))
+	historial = r['data']['popular_links']
+	links_populares = []
+	for i in historial:
+		for k in enlaces:
+			if i['link'] == k['link_corto']:
+				links_populares.append({'enlace':i['link'],'clicks':i['clicks'],'enlace_real':k['link_largo'],'tipo':k['campaña'],"camp_id":k["camp_id"],"enviados":k["enviados"]})
+	total_campsms = [x for x  in collection2.distinct('camp_id')]
+	total_campema = [x for x  in collection3.distinct('camp_id')]
+	total_campanasms= []
+	for i in links_populares:
+		for j in [x for x  in collection2.distinct('camp_id')]:
+			if j==i['camp_id'] and i['tipo']=='sms':
+				total_campanasms.append({'enlace':i['enlace'],'camp_id':j,'entregados':collection2.find({"camp_id":j}).count()})
+	for i in links_populares:
+		for j in total_campanasms:
+			if i['enlace'] == j['enlace']:
+				 i['entregados'] = j['entregados']
+	total_campanaema= []
+	for i in links_populares:
+		for j in [x for x  in collection3.distinct('camp_id')]:
+			if j==i['camp_id'] and i['tipo']=='email':
+				total_campanaema.append({'enlace':i['enlace'],'camp_id':j,'entregados':collection3.find({"camp_id":j}).count()})
+	for i in links_populares:
+		for j in total_campanaema:
+			if i['enlace'] == j['enlace']:
+				 i['entregados'] = j['entregados']
+
+	return render_template('sms.html', **locals())
 
 @app.route("/bitly")
 def bitly():
