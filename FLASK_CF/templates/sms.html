@@ -91,7 +91,7 @@
 			<!-- Content here -->
 			<h1>User Experience - SMS</h1>
 
-			<h1>_________________________</h1>
+			<h1></h1>
 
 
 			<div class="container">
@@ -149,9 +149,10 @@
 
 		<script type="text/javascript">
 
-
-			console.log(links_populares)
-
+			var mi_lista = {{ lp|tojson }};
+			var obj = JSON.parse(mi_lista)
+			console.log(obj)
+			
 
 			$("#colapsar").click(function() {
 

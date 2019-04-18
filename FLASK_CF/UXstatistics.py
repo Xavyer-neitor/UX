@@ -1,5 +1,5 @@
 import time
-from flask import Flask,render_template,request,jsonify,url_for
+from flask import Flask,render_template,request,jsonify,url_for,json
 from pymongo import *
 from bson.objectid import ObjectId
 from pprint import pprint
@@ -10,7 +10,7 @@ from flask_cors import CORS
 import pygal
 from pygal.style import Style
 import requests
-
+import html
 app = Flask(__name__)
  
 @app.route("/")
@@ -65,8 +65,11 @@ def sms():
 		for j in total_campanaema:
 			if i['enlace'] == j['enlace']:
 				 i['entregados'] = j['entregados']
+	lp={}
+	for i in range(len(links_populares)):
+		lp[i]=links_populares[i]
 
-	return render_template('sms.html', **locals())
+	return render_template('sms.html', lp=json.dumps(lp))
 
 @app.route("/bitly")
 def bitly():
