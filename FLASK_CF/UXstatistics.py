@@ -44,7 +44,7 @@ def sms():
 	for i in historial:
 		for k in enlaces:
 			if i['link'] == k['link_corto']:
-				links_populares.append({'enlace':i['link'],'clicks':i['clicks'],'enlace_real':k['link_largo'],'tipo':k['campaña'],"camp_id":k["camp_id"],"enviados":k["enviados"]})
+				links_populares.append({'enlace':i['link'],'clicks':i['clicks'],'enlace_real':k['link_largo'],'tipo':k['campaña'],"camp_id":k["camp_id"],"enviados":k["enviados"],"Titulo":k["Titulo"]})
 	total_campsms = [x for x  in collection2.distinct('camp_id')]
 	total_campema = [x for x  in collection3.distinct('camp_id')]
 	total_campanasms= []

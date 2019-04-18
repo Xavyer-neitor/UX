@@ -19,12 +19,12 @@ def shortlinks(link_corto,link_largo,campaña,camp_id,total_enviados):
 			 'fecha_creacion':datetime.now(),
 			 'campaña':campaña,
 			 'camp_id':clave,
-			 "enviados" : 
+			 "enviados" : total_enviados
 	}
 	collection.insert(datos)
 	print('[X]--correcto--[X]')
 
 
 if __name__ == "__main__":
-	shortlinks('http://bit.ly/letsnews0','https://letshome.mx/blog/5caffa0fe43805f2c2063ea8','sms',1)
+	shortlinks('http://bit.ly/letsnews0','https://letshome.mx/blog/5caffa0fe43805f2c2063ea8','sms','01',3567)
 
