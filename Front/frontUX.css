@@ -1,0 +1,216 @@
+
+body, html {
+	height: 100%;
+}
+
+h1{
+	font-family: 'Lobster', cursive;
+	color: white;
+	text-align: center;
+	text-shadow: 2px 2px black;
+	font-size: 5rem;
+	padding-top: 8rem;
+	padding-bottom: 3rem;
+}
+
+h2{
+	font-family: 'Lobster', cursive;
+	color: white;
+	text-shadow: 2px 2px black;
+	font-size: 1.5rem;
+	padding: 0rem;
+}
+
+h3{
+	font-size: 1.2rem;
+	font-family: 'Slabo 27px', serif;
+}
+
+.acomodar{
+	margin-right:1rem; 
+}
+
+.btn{
+	font-size: 1.5rem;
+	font-family: 'Slabo 27px', serif;
+}
+
+.btn-size{
+	position: relative;
+	font-size: 50px;
+	padding: 1rem; 
+
+}
+
+.bg { 
+	/* The image used */
+	background-image: url("UX-Design.jpg");
+
+	/* Full height */
+	height: 100%; 
+
+	/* Center and scale the image nicely */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+
+.opaco{
+	opacity: 0.5;
+}
+
+.navbar {
+	background-color: #1d99b4;
+}
+.navbar .navbar-brand {
+	color: #f0f0f0;
+}
+.navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus {
+	color: #ffffff;
+}
+.navbar .navbar-text {
+	color: #f0f0f0;
+}
+.navbar .navbar-text a {
+	color: #ffffff;
+}
+.navbar .navbar-text a:hover,
+.navbar .navbar-text a:focus {
+	color: #ffffff; 
+}
+.navbar .navbar-nav {
+	color: #f0f0f0;
+	border-radius: .25rem;
+	margin: 0 0.25em;
+}
+
+.nav-link{
+	color: #f0f0f0;
+	border-radius: .25rem;
+	margin: 0 0.25em;
+	font-size: 1.7rem;
+	font-family: 'Slabo 27px', serif;
+}
+
+.resize{
+	size: 5rem;
+}
+
+.imgwrapper {
+
+	width: 100%;
+}
+.imgwrapper img{
+	width: 28rem;
+	height: 16rem;
+	padding-left: 3rem;
+	padding-right: 3rem;
+	margin-bottom: -6.5rem;
+}
+
+.imgwrapper2 {
+
+	width: 100%;
+}
+.imgwrapper2 img{
+	width: 44rem;
+	height: 32rem;
+}
+
+.imgwrapperflujo {
+
+	width: 100%;
+}
+.imgwrapperflujo img{
+	width: 64rem;
+	height: 32rem;
+}
+
+#wrapper {
+	padding-left: 0;
+}
+#wrapper.toggled {
+	padding-right: 250px;
+}
+#sidebar-wrapper {
+	width: 0;
+}
+#wrapper.toggled #sidebar-wrapper {
+	width: 250px;
+}
+#page-content-wrapper {
+	padding: 20px;
+	position: relative;
+}
+#wrapper.toggled #page-content-wrapper {
+	position: relative;
+	margin-right: 0;
+}
+
+
+/* The side navigation menu */
+.sidebar {
+	margin: 0;
+	padding: 0;
+	width: 14rem;
+	background-color: #1d99b4;
+	position: fixed;
+	height: 100%;
+	overflow: auto;
+  }
+  
+  /* Sidebar links */
+  .sidebar a {
+	display: block;
+	color: #f0f0f0;
+	padding: 16px;
+	text-decoration: none;
+	font-size: 1.5rem;
+	font-family: 'Slabo 27px', serif;
+	border-radius: .25rem;
+	margin: 0 0.25em;
+  }
+  
+  /* Active/current link */
+  .sidebar a.active {
+	background-color: #4CAF50;
+	color: white;
+  }
+  
+  /* Links on mouse-over */
+  .sidebar a:hover:not(.active) {
+	background-color: #555;
+	color: white;
+  }
+  
+  /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+  div.content {
+	margin-left: 200px;
+	padding: 1px 16px;
+	height: 1000px;
+  }
+
+  /* SWITCH BUTTONS */
+.selection-buttons button{
+
+    width: 140px;
+    height: 60px;
+    color: #FFF;
+    background-color: #FFB10D;
+    border-color: #fff; /* e59f0b */
+}
+
+.selection-buttons .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open .dropdown-toggle.btn-info {
+
+	color: #FFF;
+    background-color: #00CC66;
+    border-color: #fff; /* 00b75b */
+}
