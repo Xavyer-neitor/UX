@@ -37,7 +37,7 @@ def email():
 	for i in historial:
 		for k in enlaces:
 			if i['link'] == k['link_corto']:
-				links_populares.append({'enlace':i['link'],'clicks':i['clicks'],'enlace_real':k['link_largo'],'tipo':k['campaña'],"camp_id":k["camp_id"],"enviados":k["enviados"],"Titulo":k["Titulo"]})
+				links_populares.append({'enlace':i['link'],'clicks':i['clicks'],'enlace_real':k['link_largo'],'tipo':k['campaña'],"camp_id":k["camp_id"],"enviados":k["enviados"],"Titulo":k["Titulo"],"Fecha":str(k["fecha_creacion"].year)+'/'+str(k["fecha_creacion"].month)+'/'+str(k["fecha_creacion"].day)})
 	total_campsms = [x for x  in collection2.distinct('camp_id')]
 	total_campema = [x for x  in collection3.distinct('camp_id')]
 	total_campanasms= []
@@ -58,10 +58,12 @@ def email():
 		for j in total_campanaema:
 			if i['enlace'] == j['enlace']:
 				 i['entregados'] = j['entregados']
-	lp={}
+	#lp={}
+	lp=[]
 	for i in range(len(links_populares)):
 		if links_populares[i]['tipo'] == 'email':
-			lp[i]=links_populares[i]
+			#lp[i]=links_populares[i]
+			lp.append(links_populares[i])
 
 	return render_template('email.html', lp=json.dumps(lp))
 
@@ -86,7 +88,7 @@ def sms():
 	for i in historial:
 		for k in enlaces:
 			if i['link'] == k['link_corto']:
-				links_populares.append({'enlace':i['link'],'clicks':i['clicks'],'enlace_real':k['link_largo'],'tipo':k['campaña'],"camp_id":k["camp_id"],"enviados":k["enviados"],"Titulo":k["Titulo"]})
+				links_populares.append({'enlace':i['link'],'clicks':i['clicks'],'enlace_real':k['link_largo'],'tipo':k['campaña'],"camp_id":k["camp_id"],"enviados":k["enviados"],"Titulo":k["Titulo"],"Fecha":str(k["fecha_creacion"].year)+'/'+str(k["fecha_creacion"].month)+'/'+str(k["fecha_creacion"].day)})
 	total_campsms = [x for x  in collection2.distinct('camp_id')]
 	total_campema = [x for x  in collection3.distinct('camp_id')]
 	total_campanasms= []
@@ -107,10 +109,12 @@ def sms():
 		for j in total_campanaema:
 			if i['enlace'] == j['enlace']:
 				 i['entregados'] = j['entregados']
-lp={}
-for i in range(len(links_populares)):
-	if links_populares[i]['tipo'] == 'sms':
-		lp[i]=links_populares[i]
+	lp=[]
+	for i in range(len(links_populares)):
+		if links_populares[i]['tipo'] == 'sms':
+			#lp[i]=links_populares[i]
+			lp.append(links_populares[i])
+
 
 	return render_template('sms.html', lp=json.dumps(lp))
 
@@ -134,7 +138,7 @@ def bitly():
 	for i in historial:
 		for k in enlaces:
 			if i['link'] == k['link_corto']:
-				links_populares.append({'enlace':i['link'],'clicks':i['clicks'],'enlace_real':k['link_largo'],'tipo':k['campaña'],"camp_id":k["camp_id"],"enviados":k["enviados"]})
+				links_populares.append({'enlace':i['link'],'clicks':i['clicks'],'enlace_real':k['link_largo'],'tipo':k['campaña'],"camp_id":k["camp_id"],"enviados":k["enviados"],"Fecha":str(k["fecha_creacion"].year)+'/'+str(k["fecha_creacion"].month)+'/'+str(k["fecha_creacion"].day)})
 	total_campsms = [x for x  in collection2.distinct('camp_id')]
 	total_campema = [x for x  in collection3.distinct('camp_id')]
 	total_campanasms= []

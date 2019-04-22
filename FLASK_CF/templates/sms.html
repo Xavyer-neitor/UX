@@ -91,69 +91,54 @@
 			<!-- Content here -->
 			<h1>User Experience - SMS</h1>
 
-			<h1></h1>
-
-
 			<div class="container">
 
-					<table class="table table-striped">
-	
-						<thead>
-	
-							<tr>
-	
-								<th class="bg-secondary" scope="col"><h2>Título</h2></th>
-								<th class="bg-secondary" scope="col"><h2>Link Corto</h2></th>
-								<th class="bg-dark" scope="col"><h2>Enviados</h2></th>
-								<th class="bg-dark" scope="col"><h2>Entregados</h2></th>
-								<th class="bg-dark" scope="col"><h2>Fecha</h2></th>
-	
-							</tr>
-	
-						</thead>
-	
-						<tbody>
+		<div class="tablabla">
 
-							<tr class="table-info">
+			<table class="table table-striped">
 
-								<td><h3>¿Quieres vender más rápido tu casa? Cámbiate a un sitio web de mayor tráfico</h3></td>
-								<td><h3>http://bit.ly/letsnews0</h3></td>
-								<td class="bg-info"><h3>11,232</h3></td>
-								<td class="bg-info"><h3>7,946</h3></td>
-								<td class="bg-info"><h3>15/04/2019, 01:00pm</h3></td>
+				<thead>
+					<tr>
 
-							</tr>
-	
-						</tbody>
+						<th class="bg-secondary"><h2>Titulo</h2></th>
+						<th class="bg-secondary"><h2>Link Corto</h2></th>
+						<th class="bg-secondary"><h2>Enviados</h2></th>
+						<th class="bg-secondary"><h2>Entregados</h2></th>
+						<th class="bg-secondary"><h2>clicks</h2></th>
+						<th class="bg-secondary"><h2>Fecha</h2></th>
+						<th class="bg-secondary"><h2>Campaña</h2></th>
+					</tr>
 
-						<tbody>
+				</thead>
 
-								<tr class="table-info">
-	
-									<td><h3>¡Entérate! Esto es lo que tu web inmobiliaria gasta en publicidad</h3></td>
-									<td><h3>http://bit.ly/letshome1sm</h3></td>
-									<td class="bg-info"><h3>11,232</h3></td>
-									<td class="bg-info"><h3>8013(71%)</h3></td>
-									<td class="bg-info"><h3>17/04/2019, 01:00pm</h3></td>
-	
-								</tr>
-		
-							</tbody>
-	
-					</table>
-	
-				</div>
-	
+			<tbody>
+					<script language=javascript>
 
+					
+					var lp = {{lp|tojson}};
+					var collections = JSON.parse(lp);
+				
+
+				for(var hi=0; hi<collections.length; hi++){
+						document.write(
+							"<tr class='table-info'><td class='bg-info'><h3>"+ collections[hi]["Titulo"] + "</h3></td>"+
+									"<td"+" class='bg-info'><h3>" + collections[hi]["enlace"] + "</h3></td>"+
+									"<td"+" class='bg-info'><h3>" + collections[hi]["enviados"] + "</h3></td>"+
+									"<td"+" class='bg-info'><h3>" + collections[hi]["entregados"] + "</h3></td>"+
+									"<td"+" class='bg-info'><h3>" + collections[hi]["clicks"] + "</h3></td>"+
+									"<td"+" class='bg-info'><h3>" + collections[hi]["Fecha"] + "</h3></td>"+
+									"<td"+" class='bg-info'><h3>" + collections[hi]["camp_id"] + "</h3></td>"+
+							"</tr>" );
+					}
+				</script>
+			</tbody> 
+		</table>
+		</div>
 		</div>
 
-		<script type="text/javascript">
+		
 
-			var mi_lista = {{ lp|tojson }};
-			var new_lista = JSON.parse(mi_lista)
-			console.log(new_lista)
-			
-			
+		<script type="text/javascript">
 
 			$("#colapsar").click(function() {
 
