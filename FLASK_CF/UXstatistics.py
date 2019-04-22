@@ -17,6 +17,18 @@ app = Flask(__name__)
 def home():
 	return render_template('frontUX.html')
 
+@app.route("/analytics")
+def analytics():
+	return render_template('analytics.html')
+
+@app.route("/heatmap")
+def heatmap():
+	return render_template('heatmap.html')
+
+@app.route("/flujo")
+def flujo():
+	return render_template('flujo.html')
+
 @app.route("/email")
 def email():
 

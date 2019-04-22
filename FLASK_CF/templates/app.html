@@ -2,16 +2,21 @@
 
      <head>
 
-          <title> UX - Analytics</title>
-          <link rel="icon" href="{{ url_for('static', filename='favicon.ico')}}" type="image/x-icon">
-	
-           <!-- Bootstrap CSS -->
-          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-          <link rel="stylesheet" href="{{ url_for('static', filename='frontUX.css') }}">
-
-     
-     </head>
+               <!-- Required meta tags -->
+               <meta charset="utf-8">
+               <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+               
+               <!-- Bootstrap CSS -->
+               <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+               
+                    <title>UX - Bitly</title>
+                    <link rel="icon" href="{{ url_for('static', filename='favicon.ico')}}" type="image/x-icon">
+                    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+                    <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+               
+                    <link rel="stylesheet" href="{{ url_for('static', filename='frontUX.css') }}">
+               
+               </head>
 
      <body>
 
@@ -46,21 +51,21 @@
                          </li>
 
                          <li class="nav-item dropdown">
+	
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   UX
+                              </a>
 
-                                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        UX
-                                   </a>
+                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                   <a class="dropdown-item" href="/analytics">Analytics</a>
+                                   <div class="dropdown-divider"></div>
+                                   <a class="dropdown-item" href="/flujo">Flujo</a>
+                                   <div class="dropdown-divider"></div>
+                                   <a class="dropdown-item" href="/heatmap">Heatmap</a>
 
-                                        <a class="dropdown-item" href="analytics.html">Analytics</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="flujo.html">Flujo</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="heatmap.html">Heatmap</a>
-
-                                   </div>
-
+                              </div>
+                              
                          </li>
 
                          <li class="nav-item active">
@@ -78,12 +83,9 @@
           <div class="container-fluid bg">
 
                <!-- Content here -->
+               <h1>User Experience - Bitly</h1>
 
-               <h2> Letshome - Métricas(Sms-Email)</h2>
-
-               <div>
-
-                    <p>bit.ly</p>
+               <div class="container">
 
                     <object type="image/svg+xml" data="{{image_url}}">
                          Your browser does not support SVG
