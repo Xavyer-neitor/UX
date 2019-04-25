@@ -36,13 +36,16 @@ def enviar_email(a,b):
 	LINKCORTO = 'http://bit.ly/letshome2em'
 	CAMPAÑA = '03'
 	INFOGRAFIAS =['INFOGRAFIA6-TOP5-REBOTE.jpg']
+	PRUEBA = True
 	###########################
 
 
 	collection = cliente[base_datos]['promotores_links']
+	if PRUEBA:
+		contactos = [x for x in collection.find({'email':{'$ne':None},"Origin":{'$exists':True}})]	
+	else:
+		contactos = [x for x in collection.find({'email':{'$ne':None},"Origin":{'$exists':False}})]
 	
-	contactos = [x for x in collection.find({'email':{'$ne':None},"Origin":{'$exists':True}})]	
-	#contactos = [x for x in collection.find({'email':{'$ne':None},"Origin":{'$exists':False}})]
 	print(len(contactos))
 	contactos = contactos[a:b]
 
@@ -89,7 +92,7 @@ def enviar_email(a,b):
 	# print('[X]-----------------------------')
 	# r = requests.post(url2,json=files)
 	# print(r.text)
-
+	
 for i in range(0,37):
 	enviar_email(i*100,(i+1)*100-1)
 	time.sleep(1800)

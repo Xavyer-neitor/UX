@@ -32,10 +32,14 @@ def enviar_msm(a,b):
 	MENSAJE = '#ENTERATE: ESTAS WEBS INMOBILIARIAS SON TAN MALAS QUE NI LOS AVENGERS LAS SALVARIAN'
 	CAMPAÑA = '03'
 	LINKCORTO = 'http://bit.ly/letshome2sm'
-
+	PRUEBA = True
 	collection = cliente[base_datos]['promotores_links'] 
-	contactos = [y for y in collection.find({"ranking":{'$gte':60},"phone_clean":{'$exists':True,'$nin':[re.compile('/^044/')]}},{'_id':0,'cruvs':0,'links':0})]
-	#contactos = [x for x in collection.find({'Origin':'LETSHOME','phone_clean':{'$exists':True}})]
+
+	if PRUEBA:
+		contactos = [x for x in collection.find({'Origin':'LETSHOME','phone_clean':{'$exists':True}})]
+	elif not PRUEBA:
+		contactos = [y for y in collection.find({"ranking":{'$gte':60},"phone_clean":{'$exists':True,'$nin':[re.compile('/^044/')]}},{'_id':0,'cruvs':0,'links':0})]
+	
 
 	contactos = contactos[a:b]
 	nombres_cdt = [{'nm': x["name"]} for x in contactos]
