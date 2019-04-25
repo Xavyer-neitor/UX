@@ -183,7 +183,7 @@ def bitly():
 	
 
 	for i in links_populares:
-		chart.add(str([i["camp_id"]])+i['tipo']+' '+'enviados:'+str(i['enviados'])+' '+'entregados:'+str(int((i['entregados']*100)/i['enviados']))+'%'+' '+'interaccion:'+str(int((i['clicks']*100)/i['entregados']))+'%',[{'value':i['clicks'],'label':'clicks'}])
+		chart.add(str([i["camp_id"]])+i['tipo']+' '+'enviados:'+str(i['enviados'])+' '+'entregados:'+str([i['entregados']])+str(int((i['entregados']*100)/i['enviados']))+'%'+' '+'interaccion:'+str(int((i['clicks']*100)/i['entregados']))+'%',[{'value':i['clicks'],'label':'clicks'}])
 		
 	chart.render_to_file('static/images/bar_chart.svg')
 	img_url = 'static/images/bar_chart.svg?cache=' + str(time.time())

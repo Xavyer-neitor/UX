@@ -8,9 +8,13 @@ from datetime import datetime
 # link_corto es el enlace acortado
 #link_largo es el enlace normal
 #campaña puede ser 'sms' o 'email'
-#camp_id es el identificador de la campaña actual, las primeras fueron '01'y '02'.
+#clave es el identificador de la campaña actual, las primeras fueron '01'y '02'.
 #enviados es el numero total de sms que se enviaran o emails dependiendo
-def shortlinks(link_corto,link_largo,campaña,camp_id,total_enviados):
+
+
+#Titulo= '¡ENTERATE! Estas webs inmobiliarias son tan malas que ni los Avengers las salvarían'
+
+def shortlinks(link_corto,link_largo,campaña,clave,total_enviados,Titulo):
 
 	db = MongoClient('mongodb://Scraper%2Fops:R3vim3x5o5%2F%2F@13.52.11.40:27017/admin').XLamudi
 	collection = db['bitly']
@@ -19,12 +23,14 @@ def shortlinks(link_corto,link_largo,campaña,camp_id,total_enviados):
 			 'fecha_creacion':datetime.now(),
 			 'campaña':campaña,
 			 'camp_id':clave,
-			 "enviados" : total_enviados
+			 "enviados" : total_enviados,
+			 "Titulo":Titulo
 	}
 	collection.insert(datos)
 	print('[X]--correcto--[X]')
 
 
 if __name__ == "__main__":
-	shortlinks('http://bit.ly/letsnews0','https://letshome.mx/blog/5caffa0fe43805f2c2063ea8','sms','01',3567)
+	shortlinks('http://bit.ly/letshome2em','https://www.letshome.mx/blog/Guacala-de-pollo-Estas-son-las-webs-inmobiliarias-que-menos-gustan-a-la-gente_5cbdf3905770491516a4d7b4?email','email','03',3555,'#ENTERATE: ESTAS WEBS INMOBILIARIAS SON TAN MALAS QUE NI LOS AVENGERS LAS SALVARIAN')
+	#shortlinks('http://bit.ly/letsnews1','https://letshome.mx/blog/5caffa0fe43805f2c2063ea8','sms','03',11232)
 

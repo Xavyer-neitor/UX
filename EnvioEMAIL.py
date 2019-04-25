@@ -5,15 +5,13 @@ import time
 
 
 def Mongoconexion():
-	MONGODB_HOST = '13.52.11.40'
-	MONGODB_PORT = '27017'
+	MONGODB_HOST = '18.222.106.24'
+	MONGODB_PORT = '12012'
 	MONGODB_TIMEOUT = 600000
-	MONGODB_DATABASE = 'XLamudi'
-	MONGODB_USER = 'Scraper%2Fops'
-	MONGODB_PASS = 'R3vim3x5o5%2F%2F'
-
+	MONGODB_DATABASE = 'Promotores'
+	MONGODB_USER = 'u_Main_admin'
+	MONGODB_PASS = 'SDVeR3)8u9234&(234'
 	URI_CONNECTION = "mongodb://" +MONGODB_USER+":"+MONGODB_PASS+"@"+ MONGODB_HOST + ":" + MONGODB_PORT +  "/admin"
- 
 	try:
 		client = pymongo.MongoClient(URI_CONNECTION, serverSelectionTimeoutMS=MONGODB_TIMEOUT)
 		client.server_info()
@@ -25,9 +23,7 @@ def Mongoconexion():
 	except pymongo.errors.ConnectionFailure as error:
 		#print ('Could not connect to MongoDB: %s' % error)
 		pass
-
 	return client, MONGODB_DATABASE
-
 
 cliente, base_datos = Mongoconexion()
 
@@ -35,27 +31,36 @@ cliente, base_datos = Mongoconexion()
 def enviar_email(a,b):
 
 	print('Enviando')
-	collection = cliente[base_datos]['MSM']
-	#contactos = [x for x in collection.find({'$and':[{'Origin':'LETSHOME'},{'Email':{'$ne':None}}]})]
-	#contactos = [x for x in collection.find({'Email':'javier.ramirez@revimex.mx'})]
-	contactos = [x for x in collection.find({'Email':{'$exists':True}})]
+	#########################
+	MENSAJE = '#ENTERATE: ESTAS WEBS INMOBILIARIAS SON TAN MALAS QUE NI LOS AVENGERS LAS SALVARIAN'
+	LINKCORTO = 'http://bit.ly/letshome2em'
+	CAMPAÑA = '03'
+	INFOGRAFIAS =['INFOGRAFIA6-TOP5-REBOTE.jpg']
+	###########################
+
+
+	collection = cliente[base_datos]['promotores_links']
+	
+	contactos = [x for x in collection.find({'email':{'$ne':None},"Origin":{'$exists':True}})]	
+	#contactos = [x for x in collection.find({'email':{'$ne':None},"Origin":{'$exists':False}})]
+	print(len(contactos))
 	contactos = contactos[a:b]
 
-	nombres_cdt = [{'user': x['Nombre']} for x in contactos]
+	nombres_cdt = [{'user': x['name']} for x in contactos]
 	
-	emails_cdt = [{'eml': y['Email']} for y in contactos]
+	emails_cdt = [{'eml': y['email']} for y in contactos]
 
-	campaña_cdt = [{'camp_id':'02'} for x in range(len(nombres_cdt))]
+	campaña_cdt = [{'camp_id':CAMPAÑA} for x in range(len(nombres_cdt))]
 
 	ID_cdt = [{'X-Model_ID':0} for x in range(len(nombres_cdt))]
 
-	img_cdt = [{'img':['INFOGRAFIA3-TOP5-MAX-GASTO.jpg']} for x in range(len(nombres_cdt))]
+	img_cdt = [{'img':INFOGRAFIAS} for x in range(len(nombres_cdt))]
 
-	mensajes_cdt =  [{'subtitulo': z['Titulo']} for z in contactos]
+	mensajes_cdt =  [{'subtitulo': MENSAJE} for z in range(len(nombres_cdt))]
 
-	subject_cdt =  [{'subject': '{} Conoce más sobre el mercado inmobiliario'.format(nombres_cdt[z]['user'])} for z in range(len(nombres_cdt))]
+	subject_cdt =  [{'subject': ' Conoce más sobre el mercado inmobiliario'.format(nombres_cdt[z]['user'])} for z in range(len(nombres_cdt))]
 
-	url_cdt =  [{'link1': z['url']} for z in contactos]
+	url_cdt =  [{'link1': LINKCORTO} for x in range(len(nombres_cdt))]
 
 
 	LISTA_cdt = list(zip(nombres_cdt,campaña_cdt,img_cdt,ID_cdt,emails_cdt,mensajes_cdt,url_cdt,subject_cdt))
@@ -78,14 +83,14 @@ def enviar_email(a,b):
 	url='http://192.168.2.215:8181/sendEmail_3890j4bffodj'#local
 
 
-	files= {'messages':newdict,'plantilla':'prmTi_18_04_2019'}
-	print('[X]-----------------------------')
-	pprint(str({'messages':newdict,'plantilla':'prmTi_18_04_2019'}))	
-	print('[X]-----------------------------')
-	r = requests.post(url2,json=files)
-	print(r.text)
+	# files= {'messages':newdict,'plantilla':'prmTi_18_04_2019'}
+	# print('[X]-----------------------------')
+	# pprint(str({'messages':newdict,'plantilla':'prmTi_18_04_2019'}))	
+	# print('[X]-----------------------------')
+	# r = requests.post(url2,json=files)
+	# print(r.text)
 
 for i in range(0,37):
-	time.sleep(1800)
 	enviar_email(i*100,(i+1)*100-1)
-	
+	time.sleep(1800)
+		
