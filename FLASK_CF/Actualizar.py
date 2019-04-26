@@ -31,6 +31,11 @@ def shortlinks(link_corto,link_largo,campaña,clave,total_enviados,Titulo):
 
 
 if __name__ == "__main__":
-	shortlinks('http://bit.ly/letshome2em','https://www.letshome.mx/blog/Guacala-de-pollo-Estas-son-las-webs-inmobiliarias-que-menos-gustan-a-la-gente_5cbdf3905770491516a4d7b4?email','email','03',3555,'#ENTERATE: ESTAS WEBS INMOBILIARIAS SON TAN MALAS QUE NI LOS AVENGERS LAS SALVARIAN')
+	shortlinks('http://bit.ly/letshome2em',
+				'https://www.letshome.mx/blog/Guacala-de-pollo-Estas-son-las-webs-inmobiliarias-que-menos-gustan-a-la-gente_5cbdf3905770491516a4d7b4?email',
+				'email',
+				'03',
+				3555,
+				'#ENTERATE: ESTAS WEBS INMOBILIARIAS SON TAN MALAS QUE NI LOS AVENGERS LAS SALVARIAN')
 	#shortlinks('http://bit.ly/letsnews1','https://letshome.mx/blog/5caffa0fe43805f2c2063ea8','sms','03',11232)
 

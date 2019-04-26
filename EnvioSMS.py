@@ -28,28 +28,63 @@ def Mongoconexion():
 cliente, base_datos = Mongoconexion()
 
 
-def enviar_msm(a,b):
-	MENSAJE = '#ENTERATE: ESTAS WEBS INMOBILIARIAS SON TAN MALAS QUE NI LOS AVENGERS LAS SALVARIAN'
-	CAMPAÑA = '03'
-	LINKCORTO = 'http://bit.ly/letshome2sm'
+def enviar_msm(a,b,ranking):
+	MENSAJE = '#ENTERATE: ESTAS WEBS INMOBILIARIAS SON TAN MALAS QUE NI LOS AVENGERS LAS SALVARIAN'# mensaje que se enviara en la campaña
+	CAMPAÑA = '03'#Identificador o Nombre para saber en que campaña vamos la 1 o 2 o 3 ....⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+	LINKCORTO = 'http://bit.ly/letshome2sm'# Link corto correspondiente a la campaña⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
 	PRUEBA = True
+	#coleccion de los promotores Esquema:
+		# {
+		# 	"links":"valor lista, link de la propiedad asociada al promotor",
+		# 	"name":"nombre del promotor",
+		# 	"email":"correo del promotor, None en el caso de no tener",
+		# 	"domain":"Lista, Los dominios donde estan las propiedades del promotor",
+		# 	"ranking":"Calificaion basada en publicion",
+		# 	"cruvs":"????",
+		# 	"phone_clean":"Lista, Telefonos",
+		# 	"phone":"Lista,Numero sin limpiar desde scraper",
+		# 	"Origin":"Los que tengan 'LETSHOME', son a quienes se les envia la prueba :D!"
+		# }
 	collection = cliente[base_datos]['promotores_links'] 
 
 	if PRUEBA:
-		contactos = [x for x in collection.find({'Origin':'LETSHOME','phone_clean':{'$exists':True}})]
+		#Nosotros B)
+		contactos = [x for x in collection.find({
+													'Origin':'LETSHOME',
+													'phone_clean':{
+																	'$exists':True
+																   }
+												}
+												)
+					]
 	elif not PRUEBA:
-		contactos = [y for y in collection.find({"ranking":{'$gte':60},"phone_clean":{'$exists':True,'$nin':[re.compile('/^044/')]}},{'_id':0,'cruvs':0,'links':0})]
+		#Contactos de Verdad :D!
+		contactos = [y for y in collection.find({
+												"ranking":{
+															'$gte':ranking
+														  },
+												"phone_clean":{
+																'$exists':True,
+																'$nin':[re.compile('/^044/')]
+															  }
+												},
+												{
+													'_id':0,
+													'cruvs':0,
+													'links':0
+												}
+												)]
 	
 
-	contactos = contactos[a:b]
-	nombres_cdt = [{'nm': x["name"]} for x in contactos]
+	contactos = contactos[a:b]#Envio por bloque de 1000
+	nombres_cdt = [{'nm': x["name"]} for x in contactos]#Nombres para personalizar el mensaje
 	numeros_cdt = [{'phone': y["phone_clean"][0]} for y in contactos]
 	campaña_cdt = [{'camp_id':CAMPAÑA} for x in range(len(nombres_cdt))]
-	mensajes_cdt = [{'message': '¡HOLA! '+MENSAJE+' '+LINKCORTO } for z in contactos]
+	mensajes_cdt = [{'message': '¡HOLA! '+MENSAJE+' '+LINKCORTO } for z in contactos]# Aqui!!! se tiene qye agregar el nombre para que sea personalizado
 	LISTA_cdt = list(zip(nombres_cdt,campaña_cdt,numeros_cdt,mensajes_cdt))
 	LISTA2_cdt = [list(j) for j in LISTA_cdt]
 
-	newdict=[]
+	newdict=[]#formato para envio a servidor de Comunicaciones de Serafau
 
 	for i in LISTA2_cdt:
 		h={}
@@ -58,23 +93,25 @@ def enviar_msm(a,b):
 				h[k]=j[k]
 		newdict.append(h)
 
-	print('Enviando')
+	print('Enviando')#print feo 
 	pprint(newdict)
+
+	#Servidores de prueba y produccion para Test :D!
 	url1 = 'http://commserver.letshomesupport.link:8181/sS_RVMX_f63d4E243'#otra buena
 	url2 = 'http://35.211.230.71:8181/sS_RVMX_f63d4E243'#produccion
 	url='http://192.168.2.215:8181/sS_RVMX_f63d4E243'#local
 
-
-	# files= {'messages':newdict}
-	# print('[X]-----------------------------')
-	# print(str({'messages':newdict}))	
-	# print('[X]-----------------------------')
-	# r = requests.post(url2,json=files)
-	# print(r.text)
+	#Envio de la peticion para empezar el envio de sms
+	files= {'messages':newdict}
+	print('[X]-----------------------------')
+	print(str({'messages':newdict}))	
+	print('[X]-----------------------------')
+	r = requests.post(url2,json=files)
+	print(r.text)
 
 for i in range(0,14):
-	enviar_msm(i*1000,(i+1)*1000)
-	time.sleep(300)
+	enviar_msm(i*1000,(i+1)*1000,ranking=60)
+	time.sleep(300)# Cada 5 min
 
 	
 

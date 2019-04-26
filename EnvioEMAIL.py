@@ -3,7 +3,9 @@ import pymongo
 from pprint import pprint
 import time
 
-
+# instrucciones de uso de envio de email con infografia,
+#	1.-Mandar infografia a serafin, via Correo electronico, pedir que se suba al servidor(El genera el HTML del eaml)
+#	2.-si son mas de una infografia, Mandarlos como listas , no importa el orden
 def Mongoconexion():
 	MONGODB_HOST = '18.222.106.24'
 	MONGODB_PORT = '12012'
@@ -33,14 +35,14 @@ def enviar_email(a,b):
 	print('Enviando')
 	#########################
 	MENSAJE = '#ENTERATE: ESTAS WEBS INMOBILIARIAS SON TAN MALAS QUE NI LOS AVENGERS LAS SALVARIAN'
-	LINKCORTO = 'http://bit.ly/letshome2em'
-	CAMPAÑA = '03'
-	INFOGRAFIAS =['INFOGRAFIA6-TOP5-REBOTE.jpg']
-	PRUEBA = True
+	LINKCORTO = 'http://bit.ly/letshome2em'######Cambiar para cada campaña ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+	CAMPAÑA = '03'######Cambiar para cada campaña ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+	INFOGRAFIAS =['INFOGRAFIA6-TOP5-REBOTE-PORC.jpg']#nombres de infografias 
+	PRUEBA = False #Cambiar para enviar de verdad
 	###########################
-
-
+	##Base de Promotores
 	collection = cliente[base_datos]['promotores_links']
+
 	if PRUEBA:
 		contactos = [x for x in collection.find({'email':{'$ne':None},"Origin":{'$exists':True}})]	
 	else:
@@ -49,19 +51,19 @@ def enviar_email(a,b):
 	print(len(contactos))
 	contactos = contactos[a:b]
 
-	nombres_cdt = [{'user': x['name']} for x in contactos]
+	nombres_cdt = [{'user': x['name']} for x in contactos]# En el email si se sigue usando el nombre del registro del promotor
 	
 	emails_cdt = [{'eml': y['email']} for y in contactos]
 
 	campaña_cdt = [{'camp_id':CAMPAÑA} for x in range(len(nombres_cdt))]
 
-	ID_cdt = [{'X-Model_ID':0} for x in range(len(nombres_cdt))]
+	ID_cdt = [{'X-Model_ID':0} for x in range(len(nombres_cdt))]#preguntas a Serafin Sobre este campo
 
 	img_cdt = [{'img':INFOGRAFIAS} for x in range(len(nombres_cdt))]
 
-	mensajes_cdt =  [{'subtitulo': MENSAJE} for z in range(len(nombres_cdt))]
+	mensajes_cdt =  [{'subtitulo': MENSAJE} for z in range(len(nombres_cdt))]#Subtitulo "h2" del html del correo
 
-	subject_cdt =  [{'subject': ' Conoce más sobre el mercado inmobiliario'.format(nombres_cdt[z]['user'])} for z in range(len(nombres_cdt))]
+	subject_cdt =  [{'subject': ' Conoce más sobre el mercado inmobiliario'.format(nombres_cdt[z]['user'])} for z in range(len(nombres_cdt))]# Asunto por si se requiere personalizar, utilizar el {}format
 
 	url_cdt =  [{'link1': LINKCORTO} for x in range(len(nombres_cdt))]
 
@@ -86,14 +88,17 @@ def enviar_email(a,b):
 	url='http://192.168.2.215:8181/sendEmail_3890j4bffodj'#local
 
 
-	# files= {'messages':newdict,'plantilla':'prmTi_18_04_2019'}
-	# print('[X]-----------------------------')
-	# pprint(str({'messages':newdict,'plantilla':'prmTi_18_04_2019'}))	
-	# print('[X]-----------------------------')
-	# r = requests.post(url2,json=files)
-	# print(r.text)
+	files= {
+			'messages':newdict,
+			'plantilla':'prmTi_18_04_2019'#📐 Nombre de platilla de hmtl, Preguntas a serafin el nombre de la nueva por si se cambia la platilla 
+			}
+	print('[X]-----------------------------')
+	pprint(str({'messages':newdict,'plantilla':'prmTi_18_04_2019'}))	
+	print('[X]-----------------------------')
+	r = requests.post(url2,json=files)
+	print(r.text)
 	
 for i in range(0,37):
 	enviar_email(i*100,(i+1)*100-1)
-	time.sleep(1800)
+	time.sleep(1800)# Se envian 99 cada 30 min :(
 		

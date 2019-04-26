@@ -35,9 +35,12 @@ def email():
 	#trabajar desde una base de datos
 	db = MongoClient('mongodb://Scraper%2Fops:R3vim3x5o5%2F%2F@13.52.11.40:27017/admin').XLamudi
 	db2 = MongoClient('mongodb://commserver:pbn2OpfekjfZnp?2v49183D09.f93nv049u@35.227.93.9:27017/admin').commserver
+	#Colleccion del Panle
 	collection = db['bitly']
 	enlaces=[x for x in collection.find({})]
+	#Coleccion de los mensajes entregados correctamente 
 	collection2 = db2['deliveredmsgs']
+	#Coleccion de los correos entregados correctamente 
 	collection3 = db2['deliveredmails']
 	sms = [y for y in collection2.find({})]
 	email = [z for z in collection3.find({})]
@@ -46,10 +49,20 @@ def email():
 	r = json.loads((requests.get(url.format(tokenbitly)).content).decode('utf-8'))
 	historial = r['data']['popular_links']
 	links_populares = []
+	#
 	for i in historial:
 		for k in enlaces:
 			if i['link'] == k['link_corto']:
-				links_populares.append({'enlace':i['link'],'clicks':i['clicks'],'enlace_real':k['link_largo'],'tipo':k['campaña'],"camp_id":k["camp_id"],"enviados":k["enviados"],"Titulo":k["Titulo"],"Fecha":str(k["fecha_creacion"].year)+'/'+str(k["fecha_creacion"].month)+'/'+str(k["fecha_creacion"].day)})
+				links_populares.append({
+										'enlace':i['link'],
+										'clicks':i['clicks'],
+										'enlace_real':k['link_largo'],
+										'tipo':k['campaña'],
+										"camp_id":k["camp_id"],
+										"enviados":k["enviados"],
+										"Titulo":k["Titulo"],
+										"Fecha":str(k["fecha_creacion"].year)+'/'+str(k["fecha_creacion"].month)+'/'+str(k["fecha_creacion"].day)
+										})
 	total_campsms = [x for x  in collection2.distinct('camp_id')]
 	total_campema = [x for x  in collection3.distinct('camp_id')]
 	total_campanasms= []
@@ -191,4 +204,4 @@ def bitly():
 	return render_template('app.html',image_url = img_url)
 
 if __name__ == "__main__":
-	app.run()
+	app.run(host='0.0.0.0',port=5000)
