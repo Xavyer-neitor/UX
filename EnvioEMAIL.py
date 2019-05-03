@@ -34,10 +34,10 @@ def enviar_email(a,b):
 
 	print('Enviando')
 	#########################
-	MENSAJE = '#ENTERATE: ESTAS WEBS INMOBILIARIAS SON TAN MALAS QUE NI LOS AVENGERS LAS SALVARIAN'
-	LINKCORTO = 'http://bit.ly/letshome2em'######Cambiar para cada campaña ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
-	CAMPAÑA = '03'######Cambiar para cada campaña ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
-	INFOGRAFIAS =['INFOGRAFIA6-TOP5-REBOTE-PORC.jpg']#nombres de infografias 
+	MENSAJE = 'Las cosas como son: estas características te harán el mero mero petatero'.upper()
+	LINKCORTO = 'http://bit.ly/letshome5em'######Cambiar para cada campaña ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+	CAMPAÑA = '06'######Cambiar para cada campaña ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+	INFOGRAFIAS =['Articulo_7.jpeg']#nombres de infografias 
 	PRUEBA = False #Cambiar para enviar de verdad
 	###########################
 	##Base de Promotores

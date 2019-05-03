@@ -117,9 +117,11 @@
 					
 					var lp = {{lp|tojson}};
 					var collections = JSON.parse(lp);
+					var a = 1;
 				
 
 				for(var hi=0; hi<collections.length; hi++){
+						a+=1;
 						document.write(
 							"<tr class='table-info'><td class='bg-info'><h3>"+ collections[hi]["Titulo"] + "</h3></td>"+
 									"<td"+" class='bg-info'><h3>" + collections[hi]["enlace"] + "</h3></td>"+
@@ -130,6 +132,7 @@
 									"<td"+" class='bg-info'><h3>" + collections[hi]["camp_id"] + "</h3></td>"+
 							"</tr>" );
 					}
+					console.log(a);
 				</script>
 			</tbody> 
 		</table>

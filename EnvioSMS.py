@@ -29,10 +29,10 @@ cliente, base_datos = Mongoconexion()
 
 
 def enviar_msm(a,b,ranking):
-	MENSAJE = '#ENTERATE: ESTAS WEBS INMOBILIARIAS SON TAN MALAS QUE NI LOS AVENGERS LAS SALVARIAN'# mensaje que se enviara en la campaña
-	CAMPAÑA = '03'#Identificador o Nombre para saber en que campaña vamos la 1 o 2 o 3 ....⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
-	LINKCORTO = 'http://bit.ly/letshome2sm'# Link corto correspondiente a la campaña⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
-	PRUEBA = True
+	MENSAJE = 'Las cosas como son: estas características te harán el mero mero petatero'.upper()# mensaje que se enviara en la campaña
+	CAMPAÑA = '06'#Identificador o Nombre para saber en que campaña vamos la 1 o 2 o 3 ....⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+	LINKCORTO = 'http://bit.ly/letshome5sm'# Link corto correspondiente a la campaña⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+	PRUEBA = False
 	#coleccion de los promotores Esquema:
 		# {
 		# 	"links":"valor lista, link de la propiedad asociada al promotor",
@@ -60,7 +60,7 @@ def enviar_msm(a,b,ranking):
 	elif not PRUEBA:
 		#Contactos de Verdad :D!
 		contactos = [y for y in collection.find({
-												"ranking":{
+												"scoring":{
 															'$gte':ranking
 														  },
 												"phone_clean":{
@@ -69,7 +69,7 @@ def enviar_msm(a,b,ranking):
 															  }
 												},
 												{
-													'_id':0,
+													#'_id':0,
 													'cruvs':0,
 													'links':0
 												}
@@ -80,8 +80,9 @@ def enviar_msm(a,b,ranking):
 	nombres_cdt = [{'nm': x["name"]} for x in contactos]#Nombres para personalizar el mensaje
 	numeros_cdt = [{'phone': y["phone_clean"][0]} for y in contactos]
 	campaña_cdt = [{'camp_id':CAMPAÑA} for x in range(len(nombres_cdt))]
-	mensajes_cdt = [{'message': '¡HOLA! '+MENSAJE+' '+LINKCORTO } for z in contactos]# Aqui!!! se tiene qye agregar el nombre para que sea personalizado
-	LISTA_cdt = list(zip(nombres_cdt,campaña_cdt,numeros_cdt,mensajes_cdt))
+	mensajes_cdt = [{'message': MENSAJE+' '+LINKCORTO } for z in contactos]# Aqui!!! se tiene qye agregar el nombre para que sea personalizado
+	promotor_id = [{"idP":str(w["_id"])} for w in contactos]
+	LISTA_cdt = list(zip(nombres_cdt,campaña_cdt,numeros_cdt,mensajes_cdt,promotor_id))
 	LISTA2_cdt = [list(j) for j in LISTA_cdt]
 
 	newdict=[]#formato para envio a servidor de Comunicaciones de Serafau
