@@ -29,9 +29,9 @@ cliente, base_datos = Mongoconexion()
 
 
 def enviar_msm(a,b,ranking):
-	MENSAJE = 'Las cosas como son: estas características te harán el mero mero petatero'.upper()# mensaje que se enviara en la campaña
-	CAMPAÑA = '06'#Identificador o Nombre para saber en que campaña vamos la 1 o 2 o 3 ....⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
-	LINKCORTO = 'http://bit.ly/letshome5sm'# Link corto correspondiente a la campaña⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+	MENSAJE = '¡AY, COBRÓN! ESTAS WEBS INMOBILIARIAS TE COBRAN MUCHO POR PUBLICAR TU CASA.'.upper()# mensaje que se enviara en la campaña
+	CAMPAÑA = '08'#Identificador o Nombre para saber en que campaña vamos la 1 o 2 o 3 ....⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+	LINKCORTO = 'http://bit.ly/letshome8sm'# Link corto correspondiente a la campaña⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
 	PRUEBA = False
 	#coleccion de los promotores Esquema:
 		# {
@@ -59,14 +59,22 @@ def enviar_msm(a,b,ranking):
 					]
 	elif not PRUEBA:
 		#Contactos de Verdad :D!
-		contactos = [y for y in collection.find({
-												"scoring":{
-															'$gte':ranking
-														  },
-												"phone_clean":{
-																'$exists':True,
-																'$nin':[re.compile('/^044/')]
-															  }
+		contactos = [y for y in collection.find({"$and":[{"scoring":{
+																	'$gte':ranking
+														  			}
+														 },
+														 {"$or":[
+														 		{"contacted.status":True},
+														 		{"contacted":{"$exists":False}}
+														 		]
+														 },
+														 {"phone_clean":{
+																			'$exists':True,
+																			'$nin':[re.compile('/^044/')]
+																		}
+														 }
+														 
+														 ]
 												},
 												{
 													#'_id':0,
@@ -111,7 +119,7 @@ def enviar_msm(a,b,ranking):
 	print(r.text)
 
 for i in range(0,14):
-	enviar_msm(i*1000,(i+1)*1000,ranking=60)
+	enviar_msm(i*1000,(i+1)*1000,ranking=40.3)
 	time.sleep(300)# Cada 5 min
 
 	
